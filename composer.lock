@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "12485ce2d718236db60114cf2710fdd6",
+    "content-hash": "c38dbc8f6b4a6a209bb65f90d8592021",
     "packages": [
         {
             "name": "bugsnag/bugsnag",
@@ -2586,7 +2586,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": "~5.6.0 || ~7.1.0 || ~7.2.0"
+        "php": "~5.6.0 || ~7.0.0 || ~7.1.0"
     },
     "platform-dev": []
 }
