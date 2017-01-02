@@ -1,0 +1,25 @@
+# Tell Travis to use its faster, container-based architecture for builds
+sudo: false
+
+language: php
+
+php:
+    - 5.6
+    - 7.0
+    - 7.1
+    - hhvm
+
+matrix:
+    allow_failures:
+        - php: hhvm
+
+install:
+    - travis_retry composer self-update
+    - travis_retry composer install --no-interaction --prefer-source
+
+script:
+    - ./vendor/bin/phpunit --coverage-text
+    - ./vendor/bin/phpcs -n --standard=PSR2 src/ tests/
+
+after_script:
+    - ./vendor/bin/ocular code-coverage:upload --format-php=clover ./build/logs/clover.xml
