@@ -1,2 +1,20 @@
+checks:
+    php:
+        uppercase_constants: true
+        properties_in_camelcaps: true
+        no_goto: true
+        encourage_single_quotes: true
+
 tools:
     external_code_coverage: true
+    sensiolabs_security_checker: true
+    php_code_sniffer:
+        config:
+            standard: PSR2
+            sniffs:
+                generic:
+                    php:
+                        disallow_short_open_tag_sniff: true
+    php_cpd: true
+    php_loc: true
+
