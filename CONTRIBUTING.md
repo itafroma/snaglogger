@@ -40,7 +40,11 @@ If you've added additional functionality, additional unit tests covering the "[h
 
 ### Review
 
-Once you've created your pull request, one of the project maintainers will review your code. It may take some time before someone is able to take a look at it. Once you've addressed any concerns or requested changes from the maintainers, your change will be merged.
+Once you've created your pull request, one of the project maintainers will review your code. It may take some time before someone is able to take a look at it.
+
+### Release
+
+Once you've addressed any concerns or requested changes from the maintainers during review, your change will be scheduled to be merged. Snaglogger uses [semantic versioning](https://semver.org) which requires version bumps when certain conditions are met. If your change is a breaking change, it may not be merged right away to allow non-breaking changes to be merged and released before incrementing the major version number.
 
 ## Contributor Covenant Code of Conduct
 

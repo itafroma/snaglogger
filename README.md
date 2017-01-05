@@ -14,6 +14,8 @@ Snaglogger can be added to your project via [Composer](https://getcomposer.org):
 }
 ```
 
+Snaglogger uses [semantic versioning](http://semver.org). In general, you can pin to `^[MAJOR].0` and be confident you will not receive breaking changes during updates.
+
 ## Usage
 
 ### Quickstart
