@@ -21,7 +21,8 @@ interface SeverityMapperInterface
      * return null instead of throwing an exception.
      *
      * @param mixed $level
-     *
+     *  The log level to convert. Can either be a required PSR-3 log level or
+     *  a custom log level.
      *
      * @throws InvalidArgumentException
      *   When a custom, non-required log level is passed that is not, or should
