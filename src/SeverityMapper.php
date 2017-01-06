@@ -26,7 +26,7 @@ class SeverityMapper implements SeverityMapperInterface
      */
     public function getSeverityForLogLevel($level)
     {
-        if (!isset($this->mapping[$level])) {
+        if (!array_key_exists($level, $this->mapping)) {
             $message = sprintf('The log level %s is not supported.', $level);
             throw new InvalidArgumentException($message);
         }
