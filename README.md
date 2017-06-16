@@ -9,7 +9,7 @@ Snaglogger can be added to your project via [Composer](https://getcomposer.org):
 ```json
 {
     "require": {
-        "itafroma/snaglogger": "^1.0"
+        "itafroma/snaglogger": "^2.0"
     }
 }
 ```
