@@ -83,20 +83,26 @@ class Logger implements LoggerInterface
         // Interpolate the error message.
         $message = $this->interpolator->interpolate($message, $context);
 
-        $customization = function (Report $report) use ($context, $severity) {
-            $report->setMetaData($context);
-            $report->setSeverity($severity);
-        };
-
         // Log exceptions as such.
         if (isset($context['exception']) && $context['exception'] instanceof Exception) {
-            $this->bugsnag->notifyException($context['exception'], $customization);
+
+            $exception = $context['exception'];
+            unset($context['exception']);
+
+            $this->bugsnag->notifyException($exception, function (Report $report) use ($context, $severity) {
+                $report->setMetaData($context);
+                $report->setSeverity($severity);
+            });
+
             return;
         }
 
         // Get error type.
         $type = isset($context['error-type']) ? $context['error-type'] : $severity;
 
-        $this->bugsnag->notifyError($type, $message, $customization);
+        $this->bugsnag->notifyError($type, $message, function (Report $report) use ($context, $severity) {
+            $report->setMetaData($context);
+            $report->setSeverity($severity);
+        });
     }
 }
