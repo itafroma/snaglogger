@@ -26,7 +26,6 @@ class RemoveLoggerFromStacktrace
         $stacktrace = $report->getStacktrace();
 
         foreach ($stacktrace->toArray() as $scope) {
-
             // Ignore procedural code.
             if (strpos($scope['method'], '::') === false) {
                 break;
@@ -45,10 +44,9 @@ class RemoveLoggerFromStacktrace
             // convenience methods
             if ($method === 'log') {
                 $stacktrace->removeFrame(0);
-            }
             // One of PSR-3's convenience methods was called: remove it from the
             // trace and stop.
-            elseif (in_array($method, get_class_methods(LoggerInterface::class))) {
+            } elseif (in_array($method, get_class_methods(LoggerInterface::class))) {
                 $stacktrace->removeFrame(0);
                 break;
             }

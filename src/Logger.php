@@ -89,7 +89,6 @@ class Logger implements LoggerInterface
 
         // Log exceptions as such.
         if (isset($context['exception']) && $context['exception'] instanceof Exception) {
-
             $exception = $context['exception'];
             unset($context['exception']);
 
