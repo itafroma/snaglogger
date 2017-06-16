@@ -5,6 +5,8 @@ namespace Itafroma\Snaglogger;
 use Bugsnag\Client;
 use Bugsnag\Report;
 use Exception;
+use Itafroma\Snaglogger\Callbacks\RemoveLoggerFromStacktrace;
+use Itafroma\Snaglogger\Callbacks\LoggerStacktrace;
 use Psr\Log\LoggerInterface;
 use Psr\Log\LoggerTrait;
 
@@ -65,6 +67,8 @@ class Logger implements LoggerInterface
         $this->bugsnag = $bugsnag;
         $this->interpolator = $interpolator;
         $this->mapper = $mapper;
+
+        $this->bugsnag->registerCallback(new RemoveLoggerFromStacktrace());
     }
 
     /**
