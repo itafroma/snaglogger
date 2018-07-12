@@ -3,11 +3,11 @@
 namespace Itafroma\Snaglogger\Test;
 
 use Bugsnag\Client;
+use Error;
 use Exception;
 use Itafroma\Snaglogger\Logger;
 use Itafroma\Snaglogger\MessageInterpolatorInterface;
 use Itafroma\Snaglogger\SeverityMapperInterface;
-use PHPUnit_Framework_MockObject_MockObject;
 use PHPUnit_Framework_TestCase;
 
 /**
@@ -62,6 +62,30 @@ class LoggerTest extends PHPUnit_Framework_TestCase
         $logger = new Logger($this->bugsnag, $this->interpolator, $this->mapper);
         $context = [
             'exception' => new Exception(),
+        ];
+
+        $logger->error('Test message', $context);
+    }
+
+    /**
+     * Ensures Bugsnag is notified of an exception if the 'exception' key in $context is a throwable.
+     *
+     * @requires PHP 7.0
+     *
+     */
+    public function testThrowable()
+    {
+        $this->bugsnag->expects($this->once())
+            ->method('notifyException');
+        $this->bugsnag->expects($this->exactly(0))
+            ->method('notifyError');
+
+        $this->mapper->method('getSeverityForLogLevel')
+            ->willReturn('error');
+
+        $logger = new Logger($this->bugsnag, $this->interpolator, $this->mapper);
+        $context = [
+            'exception' => new Error(),
         ];
 
         $logger->error('Test message', $context);

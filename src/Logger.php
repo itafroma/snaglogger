@@ -9,6 +9,7 @@ use Itafroma\Snaglogger\Callbacks\RemoveLoggerFromStacktrace;
 use Itafroma\Snaglogger\Callbacks\LoggerStacktrace;
 use Psr\Log\LoggerInterface;
 use Psr\Log\LoggerTrait;
+use Throwable;
 
 /**
  * A PSR-3 compliant logger for reporting to Bugsnag.
@@ -88,7 +89,8 @@ class Logger implements LoggerInterface
         $message = $this->interpolator->interpolate($message, $context);
 
         // Log exceptions as such.
-        if (isset($context['exception']) && $context['exception'] instanceof Exception) {
+
+        if (isset($context['exception']) && ($context['exception'] instanceof Exception || $context['exception'] instanceof Throwable)) {
             $exception = $context['exception'];
             unset($context['exception']);
 
