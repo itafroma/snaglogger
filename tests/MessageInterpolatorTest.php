@@ -3,12 +3,12 @@
 namespace Itafroma\Snaglogger\Test;
 
 use Itafroma\Snaglogger\MessageInterpolator;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Tests the default message interpolator.
  */
-class MessageInterpolatorTest extends PHPUnit_Framework_TestCase
+class MessageInterpolatorTest extends TestCase
 {
     /**
      * Ensures the interpolator performs replacements as expected.

@@ -8,12 +8,12 @@ use Exception;
 use Itafroma\Snaglogger\Logger;
 use Itafroma\Snaglogger\MessageInterpolatorInterface;
 use Itafroma\Snaglogger\SeverityMapperInterface;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Tests the Snaglogger logger.
  */
-class LoggerTest extends PHPUnit_Framework_TestCase
+class LoggerTest extends TestCase
 {
     /**
      * A mock Bugsnag client.
@@ -39,7 +39,7 @@ class LoggerTest extends PHPUnit_Framework_TestCase
     /**
      * {@inheritDoc}
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->bugsnag = $this->createMock(Client::class);
         $this->interpolator = $this->createMock(MessageInterpolatorInterface::class);

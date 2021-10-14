@@ -6,12 +6,12 @@ use Bugsnag\Configuration;
 use Bugsnag\Report;
 use Bugsnag\Stacktrace;
 use Itafroma\Snaglogger\Callbacks\RemoveLoggerFromStacktrace;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Tests the Bugsnag callback to remove PSR-3 loggers from the top of the stacktrace.
  */
-class RemoveLoggerFromStacktraceTest extends PHPUnit_Framework_TestCase
+class RemoveLoggerFromStacktraceTest extends TestCase
 {
     /**
      * A mock stacktrace.
@@ -30,7 +30,7 @@ class RemoveLoggerFromStacktraceTest extends PHPUnit_Framework_TestCase
     /**
      * {@inheritDoc}
      */
-    public function setUp()
+    public function setUp(): void
     {
         $config = $this->createMock(Configuration::class);
 
