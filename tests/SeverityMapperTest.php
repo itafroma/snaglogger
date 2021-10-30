@@ -3,13 +3,14 @@
 namespace Itafroma\Snaglogger\Test;
 
 use Itafroma\Snaglogger\SeverityMapper;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
+use Psr\Log\InvalidArgumentException;
 use Psr\Log\LogLevel;
 
 /**
  * Tests the default log-level-to-Bugsnag-severity mapper.
  */
-class SeverityMapperTest extends PHPUnit_Framework_TestCase
+class SeverityMapperTest extends TestCase
 {
     /**
      * Ensures the severity mapper handles all required log levels.
@@ -18,23 +19,23 @@ class SeverityMapperTest extends PHPUnit_Framework_TestCase
     {
         $mapper = new SeverityMapper();
 
-        $mapper->getSeverityForLogLevel(LogLevel::EMERGENCY);
-        $mapper->getSeverityForLogLevel(LogLevel::ALERT);
-        $mapper->getSeverityForLogLevel(LogLevel::CRITICAL);
-        $mapper->getSeverityForLogLevel(LogLevel::ERROR);
-        $mapper->getSeverityForLogLevel(LogLevel::WARNING);
-        $mapper->getSeverityForLogLevel(LogLevel::NOTICE);
-        $mapper->getSeverityForLogLevel(LogLevel::INFO);
-        $mapper->getSeverityForLogLevel(LogLevel::DEBUG);
+        $this->assertEquals('error', $mapper->getSeverityForLogLevel(LogLevel::EMERGENCY));
+        $this->assertEquals('error', $mapper->getSeverityForLogLevel(LogLevel::ALERT));
+        $this->assertEquals('error', $mapper->getSeverityForLogLevel(LogLevel::CRITICAL));
+        $this->assertEquals('error', $mapper->getSeverityForLogLevel(LogLevel::ERROR));
+        $this->assertEquals('warning', $mapper->getSeverityForLogLevel(LogLevel::WARNING));
+        $this->assertEquals('info', $mapper->getSeverityForLogLevel(LogLevel::NOTICE));
+        $this->assertEquals('info', $mapper->getSeverityForLogLevel(LogLevel::INFO));
+        $this->assertEquals('info', $mapper->getSeverityForLogLevel(LogLevel::DEBUG));
     }
 
     /**
      * Ensures the severity mapper throws an exception for an optional log level.
-     *
-     * @expectedException \Psr\Log\InvalidArgumentException
      */
-    public function testExeptionIsThrownForUnhandledLogLevel()
+    public function testExceptionIsThrownForUnhandledLogLevel()
     {
+        $this->expectException(InvalidArgumentException::class);
+
         $mapper = new SeverityMapper();
 
         $mapper->getSeverityForLogLevel('invalid');
